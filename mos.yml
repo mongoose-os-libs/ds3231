@@ -1,0 +1,27 @@
+author: Liviu Nicolescu nliviu@gmail.com
+description: DS3231 I2C library
+type: lib
+
+version: 1.0
+
+includes:
+  - include
+
+sources:
+  - src
+
+config_schema:
+#I2C
+ - ["i2c.enable", true]
+
+libs:
+  - origin: https://github.com/mongoose-os-libs/i2c
+
+tags:
+  - c
+  - c++
+  - js
+  - hw
+
+manifest_version: 2017-09-29
+
