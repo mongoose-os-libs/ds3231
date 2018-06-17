@@ -139,6 +139,11 @@ int mgos_ds3231_settimeofday(struct mgos_ds3231* ds);
  */
 float mgos_ds3231_get_temperature_float(struct mgos_ds3231* ds);
 
+/*
+ * Get the temperature accurate to within 0.25 degrees (F)
+ */
+float mgos_ds3231_get_temperature_float_f(struct mgos_ds3231* ds);
+
 /** Disable any existing alarm settings.
  *
  *  @return Success True/False

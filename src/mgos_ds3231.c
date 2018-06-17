@@ -277,6 +277,18 @@ float mgos_ds3231_get_temperature_float(struct mgos_ds3231* ds) {
   return t;
 }
 
+float mgos_ds3231_get_temperature_float_f(struct mgos_ds3231* ds) {
+
+  float t = mgos_ds3231_get_temperature_float(ds);
+
+  if( t == 0.0 ){
+    return t;
+  }
+  
+  t = (t * 1.8f) + 32.0f;
+  return t;
+}
+
 bool mgos_ds3231_disable_alarms(struct mgos_ds3231* ds) {
   if (NULL == ds) {
     return false;
