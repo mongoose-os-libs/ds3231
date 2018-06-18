@@ -263,15 +263,14 @@ float mgos_ds3231_get_temperature_float(struct mgos_ds3231* ds) {
   float t = 0;
   uint8_t data[2];
   if (mgos_i2c_read_reg_n(ds->_i2c, ds->_addr, DS3231_REG_TEMPERATURE, 2, data)) {
-    float sign = 1.0;
-    if (data[0]&0x80) { // if negative get two's complement
-      data[0] ^= 0xFF;
-      data[0] += 0x01;
-      sign = -1.0;
+    int16_t raw = 0x0000;
+    if (0x80 & data[0]) {
+      // prepare for negative value
+      raw = 0xff00;
     }
-    t = data[0];
-    t += (data[1] >> 6)*0.25;
-    t *= sign;
+    raw = (raw | data[0]) << 2;
+    raw |= (data[1] >> 6);
+    t = raw * 0.25;
   }
 
   return t;
