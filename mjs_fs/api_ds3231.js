@@ -101,7 +101,8 @@ let DS3231 = {
     _rd: ffi('void* mgos_ds3231_read(void*)'),
     _wr: ffi('int mgos_ds3231_write(void*, void*)'),
     _wru: ffi('int mgos_ds3231_write_unixtime(void*, int)'),
-    _gtf: ffi('float mgos_ds3231_get_temperature_float(void*)'),
+    _gtfc: ffi('float mgos_ds3231_get_temperature_c(void*)'),
+    _gtff: ffi('float mgos_ds3231_get_temperature_f(void*)'),
     _disa: ffi('int mgos_ds3231_disable_alarms(void*)'),
     _cka: ffi('int mgos_ds3231_check_alarms(void*, bool)'),
     _sa: ffi('int mgos_ds3231_set_alarm(void*, void*, int)'),
@@ -147,10 +148,16 @@ let DS3231 = {
             return DS3231._wru(this.rtc, unixtime);
         },
 
-        // ## **`rtc.getTemperature()`**
-        // Return the temperature
-        getTemperature: function () {
-            return DS3231._gtf(this.rtc);
+        // ## **`rtc.getTemperatureC()`**
+        // Return the temperature in Celsius
+        getTemperatureC: function () {
+            return DS3231._gtfc(this.rtc);
+        },
+
+        // ## **`rtc.getTemperatureF()`**
+        // Return the temperature in Fahrenheit
+        getTemperatureF: function () {
+            return DS3231._gtff(this.rtc);
         },
 
         // ## **`rtc.disableAlarms()`**

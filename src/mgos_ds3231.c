@@ -255,7 +255,7 @@ int mgos_ds3231_settimeofday(struct mgos_ds3231* ds) {
   return mgos_settimeofday(now, NULL);
 }
 
-float mgos_ds3231_get_temperature_float(struct mgos_ds3231* ds) {
+float mgos_ds3231_get_temperature_c(struct mgos_ds3231* ds) {
   if (NULL == ds) {
     return 0.0;
   }
@@ -274,6 +274,14 @@ float mgos_ds3231_get_temperature_float(struct mgos_ds3231* ds) {
   }
 
   return t;
+}
+
+float mgos_ds3231_get_temperature_f(struct mgos_ds3231* ds) {
+  if (NULL == ds) {
+    return 0.0;
+  }
+  float t = mgos_ds3231_get_temperature_c(ds);
+  return (t * 1.8f) + 32.0f;
 }
 
 bool mgos_ds3231_disable_alarms(struct mgos_ds3231* ds) {

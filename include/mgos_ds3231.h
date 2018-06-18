@@ -135,9 +135,14 @@ bool mgos_ds3231_write_unixtime(struct mgos_ds3231* ds, const time_t unixtime);
 int mgos_ds3231_settimeofday(struct mgos_ds3231* ds);
 
 /*
- * Get the temperature accurate to within 0.25 degrees (C)
+ * Get the temperature accurate to within 0.25 Celsius
  */
-float mgos_ds3231_get_temperature_float(struct mgos_ds3231* ds);
+float mgos_ds3231_get_temperature_c(struct mgos_ds3231* ds);
+
+/*
+ * Get the temperature in Fahrenheit
+ */
+float mgos_ds3231_get_temperature_f(struct mgos_ds3231* ds);
 
 /** Disable any existing alarm settings.
  *
