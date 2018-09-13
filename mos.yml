@@ -22,6 +22,7 @@ tags:
   - c++
   - js
   - hw
+  - docs:drivers:DS3231 I2C
 
 manifest_version: 2017-09-29
 
