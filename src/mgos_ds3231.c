@@ -317,6 +317,25 @@ uint8_t mgos_ds3231_check_alarms(struct mgos_ds3231* ds) {
   return alarm;
 }
 
+// MFP mod
+uint8_t mgos_ds3231_check_stopflag(struct mgos_ds3231* ds, int clear) {
+  if (NULL == ds) {
+    return 0;
+  }
+  uint8_t status_byte = 0;
+
+  //DS3231_REG_STATUS
+  status_byte = mgos_i2c_read_reg_b(ds->_i2c, ds->_addr, DS3231_REG_STATUS);
+
+  uint8_t stopflag = (status_byte & 0x80) && 0x80;
+  if (stopflag && clear) {
+    // Clear the flag
+    mgos_i2c_write_reg_b(ds->_i2c, ds->_addr, DS3231_REG_STATUS, status_byte & 0x7F);
+  }
+
+  return stopflag;
+}
+
 uint8_t mgos_ds3231_set_alarm(struct mgos_ds3231* ds, const struct mgos_ds3231_date_time* alarm_date, uint8_t alarm_mode) {
   if (NULL == ds) {
     return 0;

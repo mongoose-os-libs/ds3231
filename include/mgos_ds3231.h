@@ -157,6 +157,14 @@ bool mgos_ds3231_disable_alarms(struct mgos_ds3231* ds);
  */
 uint8_t mgos_ds3231_check_alarms(struct mgos_ds3231* ds);
 
+// MFP mod
+/*
+ * Determine if the oscillator stop flag is set
+ *
+ *  Returns the flag status
+ */
+uint8_t mgos_ds3231_check_stopflag(struct mgos_ds3231* ds, int clear);
+
 /*
  * Sets an alarm, the alarm will pull the SQW pin low (you can monitor with an interrupt).
  *
