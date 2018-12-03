@@ -1,5 +1,7 @@
 #include <mgos.h>
-#include <mjs.h>
+#ifdef MOS_MJS_H_
+  #include <mjs.h>
+#endif
 #include "mgos_ds3231.h"
 #include "mgos_i2c.h"
 
@@ -37,6 +39,7 @@ void mgos_ds3231_date_time_set_date(struct mgos_ds3231_date_time* dt, uint16_t y
   dt->Dow = dow(year, month, day);
 }
 
+#ifdef MOS_MJS_H_
 const struct mjs_c_struct_member* mgos_ds3231_date_time_get_struct_descr() {
   static const struct mjs_c_struct_member struct_descr[] = {
     {"Second", offsetof(struct mgos_ds3231_date_time, Second), MJS_FFI_CTYPE_INT},
@@ -51,6 +54,7 @@ const struct mjs_c_struct_member* mgos_ds3231_date_time_get_struct_descr() {
   };
   return struct_descr;
 }
+#endif
 
 /*
  * Assumes date/time is UTC

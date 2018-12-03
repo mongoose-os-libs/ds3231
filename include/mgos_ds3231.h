@@ -51,7 +51,9 @@ struct mgos_ds3231_date_time {
   time_t unixtime;
 };
 
+#ifdef MOS_MJS_H_
 struct mjs_c_struct_member;
+#endif
 
 /*
  * Create a `mgos_ds3231_date_time` structure
@@ -79,7 +81,9 @@ void mgos_ds3231_date_time_set_time(struct mgos_ds3231_date_time* dt, uint8_t ho
 /*
  * Get the structure description
  */
+#ifdef MOS_MJS_H_
 const struct mjs_c_struct_member* mgos_ds3231_date_time_get_struct_descr();
+#endif
 
 /*
  * Get the `unixtime` time part of the `mgos_ds3231_date_time` structure.
