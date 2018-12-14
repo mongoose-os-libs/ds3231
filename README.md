@@ -2,7 +2,10 @@
 
 ## Implementation
 The library implements 2 structures: `struct mgos_ds3231` and a helper `struct mgos_ds3231_date_time`.
-Both structures are available for mJS too.
+Both structures are available for mJS too. The mJS support is available if the user includes the mjs library:
+```
+  - origin: https://github.com/mongoose-os-libs/mjs
+```
 
 ### struct mgos_ds3231
 This is used to communicate with the DS3231.
