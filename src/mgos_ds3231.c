@@ -190,10 +190,14 @@ struct mgos_ds3231 *mgos_ds3231_create(uint8_t addr) {
   ds->_addr = addr;
   ds->_i2c = i2c;
   // init the DS3231
-  // Setup the clock to make sure that it is running, that the oscillator and
-  // square wave are disabled, and that alarm interrupts are disabled
-  mgos_i2c_write_reg_b(i2c, addr, DS3231_REG_CONTROL, 0x00);
-  mgos_ds3231_disable_alarms(ds);
+  // init the DS3231
+  // Set the chip to an initial known state (the power-on defaults): oscillator
+  // enabled, battery-backed square wave disabled, ~INT/SQW output set to 
+  // interrupt function and both alarm interrupts disabled
+  mgos_i2c_write_reg_b(i2c, addr, DS3231_REG_CONTROL, 0x1C);
+  // No need to call mgos_i2c_disable_alarms, since they will already be 
+  // disabled by the code above
+  //mgos_ds3231_disable_alarms(ds);
   return ds;
 }
 
