@@ -193,6 +193,10 @@ struct mgos_ds3231 *mgos_ds3231_create(uint8_t addr) {
   // Setup the clock to make sure that it is running, that the oscillator and
   // square wave are disabled, and that alarm interrupts are disabled
   mgos_i2c_write_reg_b(i2c, addr, DS3231_REG_CONTROL, 0x00);
+  // If we are seting up a new mgos_ds3231 instance, it makes sense to clear
+  // any previous interrupt flag that is pending, to prevent it from being 
+  // reasserted when the device is (re)initialized.
+  mgos_ds3231_check_alarms(ds);
   mgos_ds3231_disable_alarms(ds);
   return ds;
 }
