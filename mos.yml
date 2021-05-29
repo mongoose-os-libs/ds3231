@@ -15,7 +15,7 @@ config_schema:
  - ["i2c.enable", true]
 
 libs:
-  - origin: https://github.com/mongoose-os-libs/i2c
+  - location: https://github.com/mongoose-os-libs/i2c
 
 tags:
   - c
